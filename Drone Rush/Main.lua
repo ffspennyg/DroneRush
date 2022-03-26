@@ -22,6 +22,15 @@ end
 function loadHighScores()
     love.filesystem.setIdentity('dronerush.1st')
 
+    if not love.filesystem.getInfo('dronerush.lst') then
+        local scores = ''
+        for i = 10, 1, -1 do
+            scores = scores .. 'CTO\n'
+            scores = scores .. tostring(i * 1000) .. '\n'
+        end
+
+        love.filesystem.write('dronerush.lst', scores)
+    end
 
     local name = true
     local currentName = nil
@@ -71,6 +80,16 @@ gStateMachine:change('start', {
 })
 
 love.keyboard.keysPressed = {}
+
+    if not love.filesystem.getInfo('breakout.lst') then
+        local scores = ''
+        for i = 10, 1, -1 do
+            scores = scores .. 'CTO\n'
+            scores = scores .. tostring(i * 1000) .. '\n'
+        end
+
+        love.filesystem.write('breakout.lst', scores)
+    end
 
 function love.update(dt)
 
